@@ -1,5 +1,6 @@
+import { LoginPage, UsersPage } from "./components";
 
-import { LoginPage } from "./components/LoginPage";
+
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       {/* <BasicFunctions/> */}
       {/* <Counter/> */}
       {/* <CounterWithHook /> */}
-      <LoginPage/>
+      {/* <LoginPage/> */}
+      <UsersPage />
     </main>
   );
 }
