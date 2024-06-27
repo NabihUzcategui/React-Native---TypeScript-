@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 
-import {ReqResUserListResponse, User} from "../interfaces";
+import type {ReqResUserListResponse, User} from "../interfaces";
 
 const LoadUser = async (): Promise<User[]> => {
   try {
@@ -16,10 +16,10 @@ const LoadUser = async (): Promise<User[]> => {
 };
 
 export const UsersPage = () => {
-  const [users, setusers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    LoadUser().then((users) => console.log(users));
+    LoadUser().then(setUsers);
   }, []);
 
   return (
@@ -35,11 +35,21 @@ export const UsersPage = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>avatar</td>
-            <td>nombre</td>
-            <td>email</td>
-          </tr>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>
+                <img
+                  style={{width: "70px"}}
+                  src={user.avatar}
+                  alt="User Avatar"
+                />
+              </td>
+              <td>
+                {user.first_name} {user.last_name}
+              </td>
+              <td>{user.email}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
